@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useSession, signIn, signOut } from "next-auth/react"
-import { Menu, X, Github, Moon, Sun, Sparkles, Wand2, Code } from "lucide-react"
+import { Menu, X, Github, Moon, Sun, Sparkles, Wand2, Code, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import {
@@ -121,6 +121,12 @@ export function Navbar() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
+                  <Link href="/v0-chat" className="text-muted-foreground hover:text-foreground">
+                    <MessageSquare className="mr-2 h-4 w-4" />
+                    V0 Chat
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link href="/presentations">Presentations</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -195,6 +201,10 @@ export function Navbar() {
                   <Link href="/advanced-ui-generator" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
                     <Code className="mr-2 h-4 w-4" />
                     Advanced UI Generator
+                  </Link>
+                  <Link href="/v0-chat" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
+                    <MessageSquare className="mr-2 h-4 w-4" />
+                    V0 Chat
                   </Link>
                   <Link href="/presentations" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
                     Presentations

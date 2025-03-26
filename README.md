@@ -97,6 +97,17 @@ WEBCONTAINER_API_KEY=your_webcontainer_api_key
 
 See `env.template` for all available configuration options.
 
+## V0 Chat Component
+
+The V0 Chat component provides a chat interface inspired by Vercel's v0.dev. Features include:
+
+- Auto-resizing textarea for input
+- Dark mode compatible UI
+- Quick action buttons for common tasks
+- Intuitive attachment and sending functionality
+
+Access it at `/v0-chat`.
+
 ## Environment Setup
 
 Create a `.env.local` file in the root directory with the following variables:
@@ -125,6 +136,23 @@ OPENROUTER_API_KEY=sk-or-xxx
 # GitHub
 GITHUB_TOKEN=ghp_xxx
 ```
+
+## Deployment
+
+OctaActions is optimized for deployment on Vercel. The project includes:
+
+- Vercel Analytics integration for user insights
+- Speed Insights for performance monitoring
+- Build optimization scripts for dependency compatibility
+- Security headers for production deployments
+
+To deploy to Vercel:
+
+1. Fork the repository and connect it to your Vercel account
+2. Set the required environment variables in the Vercel dashboard
+3. Deploy using the default settings
+
+The application will automatically use the pre-build script to ensure dependency compatibility.
 
 ## Getting Started
 
