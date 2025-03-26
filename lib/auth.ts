@@ -5,6 +5,7 @@
 import { auth } from "@clerk/nextjs";
 import { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
+import Auth0Provider from "next-auth/providers/auth0";
 
 export interface AuthUser {
   id: string;
@@ -12,6 +13,28 @@ export interface AuthUser {
   name?: string;
   image?: string;
 }
+
+/**
+ * NextAuth configuration options
+ */
+export const authOptions = {
+  providers: [
+    Auth0Provider({
+      clientId: process.env.AUTH0_CLIENT_ID!,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET!,
+      issuer: process.env.AUTH0_ISSUER_BASE_URL,
+    }),
+  ],
+  secret: process.env.AUTH0_SECRET,
+  callbacks: {
+    async session({ session, token }) {
+      if (token.sub) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+  },
+};
 
 /**
  * Get the authenticated user from the request

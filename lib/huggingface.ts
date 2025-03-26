@@ -1,7 +1,7 @@
-import { InferenceClient } from "@huggingface/inference";
+import { HfInference } from "@huggingface/inference";
 
 // Create a singleton instance of the InferenceClient
-let client: InferenceClient | null = null;
+let client: HfInference | null = null;
 
 export function getHuggingFaceClient() {
   if (!client) {
@@ -9,7 +9,7 @@ export function getHuggingFaceClient() {
     if (!apiKey) {
       throw new Error("HUGGING_FACE_TOKEN is not set in environment variables");
     }
-    client = new InferenceClient(apiKey);
+    client = new HfInference(apiKey);
   }
   return client;
 }
