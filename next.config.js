@@ -5,6 +5,7 @@ const nextConfig = {
   experimental: {
     // Enable webpack build worker
     webpackBuildWorker: true,
+    esmExternals: 'loose',
     // These settings help prevent issues with Clerk integration
     serverComponentsExternalPackages: [
       '@clerk/nextjs',
@@ -28,13 +29,20 @@ const nextConfig = {
       'img.clerk.com',
     ],
   },
-  webpack: (config) => {
+  webpack: (config, options) => {
+    config.experiments = {
+      asyncWebAssembly: true,
+      layers: true,
+      topLevelAwait: true
+    }
+
     config.module.rules.push({
-      test: /\\.handlebars$/,
-      use: 'handlebars-loader',
+      test: /\.handlebars$/,
+      use: ['handlebars-loader']
     });
+
     return config;
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
