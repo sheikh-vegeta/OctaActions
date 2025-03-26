@@ -20,15 +20,17 @@ OctaActions is a comprehensive browser-based development platform that combines 
 
 ### 3. Enhanced AI Integration
 
-- Support for multiple language models:
-  - GPT-4o and GPT-4o Mini
-  - Qwen models (72B, 7B)
-  - Llama 3 models
-  - DeepSeek V3
-  - Claude models
-  - Anthropic's R1 1776
+- Support for multiple language models and providers:
+  - OpenAI: GPT-4o and GPT-4o Mini
+  - Anthropic: Claude 3 Opus, Sonnet, and R1 1776
+  - Groq: Llama 3 (70B, 8B)
+  - HuggingFace: Mixtral 8x7B, DeepSeek V3, and more
+  - NVIDIA AI: Llama 3.3 Nemotron, Mistral Small, Llama 3.3 70B, CodeLlama
+  - OpenRouter: Access to multiple models with a single API
+  - Model Context Protocol (MCP) support for advanced tool calling
 - AI-powered code generation and assistance
 - Multilingual AI responses
+- Interactive model playground for experimenting with different models
 
 ### 4. GitHub Integration
 
@@ -51,6 +53,50 @@ OctaActions is a comprehensive browser-based development platform that combines 
 - Responsive layouts
 - Accessibility features
 
+## UI Generation
+
+OctaActions includes powerful UI generation capabilities:
+
+### Basic UI Generator
+
+The Basic UI Generator allows you to:
+
+- Generate UI components from text prompts
+- Analyze and convert UI mockup images into code
+- Support for multiple UI frameworks (shadcn/ui, NextUI, etc.)
+- Real-time preview and editing
+
+Access it at `/ui-generator`.
+
+### Advanced UI Generator
+
+The Advanced UI Generator provides enhanced capabilities:
+
+- Search a vast library of UI components
+- Generate optimized code with multiple AI models
+- Code optimization with AST manipulation
+- GitHub integration for direct PR creation
+- Support for multiple frameworks (React, Next.js, Svelte)
+- Support for multiple UI libraries (shadcn/ui, NextUI, Flowbite)
+
+Access it at `/advanced-ui-generator`.
+
+### Environment Variables
+
+To use all UI generation features, set these environment variables:
+
+```
+OPENAI_API_KEY=your_openai_api_key
+REPLICATE_API_TOKEN=your_replicate_api_token
+SEMANTIC_UI_API_KEY=your_semantic_ui_api_key
+GITHUB_TOKEN=your_github_token
+GITHUB_OWNER=your_github_username
+GITHUB_REPO=your_repo_name
+WEBCONTAINER_API_KEY=your_webcontainer_api_key
+```
+
+See `env.template` for all available configuration options.
+
 ## Environment Setup
 
 Create a `.env.local` file in the root directory with the following variables:
@@ -65,10 +111,16 @@ NEXT_PUBLIC_AUTH0_CLIENT_ID=xxx
 NEXT_PUBLIC_AUTH0_REDIRECT_URI=http://localhost:3000
 AUTH0_SECRET=xxx
 
+# Site Info
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SITE_NAME=OctaActions
+
 # AI Services
 HUGGING_FACE_TOKEN=hf_xxx
 GROQ_API_KEY=gsk_xxx
-ELEVENLABS_API_KEY=xx
+ELEVENLABS_API_KEY=xxx
+NVIDIA_API_KEY=nvapi-xxx
+OPENROUTER_API_KEY=sk-or-xxx
 
 # GitHub
 GITHUB_TOKEN=ghp_xxx
@@ -100,7 +152,14 @@ OctaActions is built with:
 - Tailwind CSS
 - Clerk/Auth0 for authentication
 - Monaco Editor for code editing
-- HuggingFace, Groq, and OpenAI for AI features
+- Multiple AI providers:
+  - OpenAI
+  - Anthropic
+  - HuggingFace
+  - Groq
+  - NVIDIA AI
+  - OpenRouter
+  - MCP for tool calling capabilities
 
 ## দোয়েল (Doyel) - Bengali Language Support
 

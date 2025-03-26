@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useSession, signIn, signOut } from "next-auth/react"
-import { Menu, X, Github, Moon, Sun } from "lucide-react"
+import { Menu, X, Github, Moon, Sun, Sparkles, Wand2, Code } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import {
@@ -100,10 +100,28 @@ export function Navbar() {
                   <Link href="/dashboard">Dashboard</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/projects">Projects</Link>
+                  <Link href="/editor">Editor</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/settings">Settings</Link>
+                  <Link href="/playground" className="text-muted-foreground hover:text-foreground">
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    AI Playground
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/ui-generator" className="text-muted-foreground hover:text-foreground">
+                    <Wand2 className="mr-2 h-4 w-4" />
+                    UI Generator
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/advanced-ui-generator" className="text-muted-foreground hover:text-foreground">
+                    <Code className="mr-2 h-4 w-4" />
+                    Advanced UI Generator
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/presentations">Presentations</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
@@ -163,11 +181,23 @@ export function Navbar() {
                   <Link href="/dashboard" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
                     Dashboard
                   </Link>
-                  <Link href="/projects" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
-                    Projects
+                  <Link href="/editor" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
+                    Editor
                   </Link>
-                  <Link href="/settings" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
-                    Settings
+                  <Link href="/playground" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    AI Playground
+                  </Link>
+                  <Link href="/ui-generator" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
+                    <Wand2 className="mr-2 h-4 w-4" />
+                    UI Generator
+                  </Link>
+                  <Link href="/advanced-ui-generator" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
+                    <Code className="mr-2 h-4 w-4" />
+                    Advanced UI Generator
+                  </Link>
+                  <Link href="/presentations" className="py-2 text-sm font-medium" onClick={() => setMobileMenuOpen(false)}>
+                    Presentations
                   </Link>
                   <Button variant="ghost" className="justify-start px-2" onClick={() => signOut()}>
                     Log out
@@ -191,4 +221,3 @@ export function Navbar() {
     </header>
   )
 }
-

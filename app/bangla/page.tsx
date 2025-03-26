@@ -23,6 +23,9 @@ export default function BanglaPage() {
             <Link href="#pricing" className="text-sm font-medium">
               মূল্য
             </Link>
+            <Link href="/bangla/playground" className="text-sm font-medium">
+              এআই প্লেগ্রাউন্ড
+            </Link>
             <Link href="#about" className="text-sm font-medium">
               সম্পর্কে
             </Link>
@@ -150,7 +153,7 @@ export default function BanglaPage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
               <Code className="h-4 w-4 text-primary-foreground" />
             </div>
-            <p className="text-sm text-muted-foreground">© 2024 OctaActions. সর্বস্বত্ব সংরক্ষিত।</p>
+            <p className="text-sm text-muted-foreground"> 2024 OctaActions. সর্বস্বত্ব সংরক্ষিত।</p>
           </div>
           <div className="flex items-center gap-4">
             <Link href="#" className="text-sm text-muted-foreground hover:underline">
@@ -168,4 +171,3 @@ export default function BanglaPage() {
     </div>
   )
 }
-

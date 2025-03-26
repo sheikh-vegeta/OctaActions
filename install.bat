@@ -31,10 +31,16 @@ if not exist .env.local (
         echo NEXT_PUBLIC_AUTH0_REDIRECT_URI=http://localhost:3000
         echo AUTH0_SECRET=
         echo.
+        echo # Site Info
+        echo NEXT_PUBLIC_SITE_URL=http://localhost:3000
+        echo NEXT_PUBLIC_SITE_NAME=OctaActions
+        echo.
         echo # AI Services
         echo HUGGING_FACE_TOKEN=
         echo GROQ_API_KEY=
         echo ELEVENLABS_API_KEY=
+        echo NVIDIA_API_KEY=
+        echo OPENROUTER_API_KEY=
         echo.
         echo # GitHub
         echo GITHUB_TOKEN=

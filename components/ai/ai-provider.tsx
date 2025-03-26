@@ -9,6 +9,8 @@ import { openai } from "@ai-sdk/openai"
 import { groq } from "@ai-sdk/groq"
 import { anthropic } from "@ai-sdk/anthropic"
 import { generateHuggingFaceCompletion } from "@/lib/huggingface"
+import { generateNvidiaCompletion } from "@/lib/nvidia-ai"
+import { generateOpenRouterCompletion } from "@/lib/openrouter"
 
 type AIModel = {
   id: string
@@ -17,6 +19,7 @@ type AIModel = {
   contextLength: number
   supportsVision: boolean
   supportsStreaming: boolean
+  supportsToolCalling?: boolean
 }
 
 type AIContextType = {
@@ -116,6 +119,67 @@ const availableModels: AIModel[] = [
     supportsVision: true,
     supportsStreaming: true,
   },
+  // NVIDIA AI Models
+  {
+    id: "nvidia/llama-3.3-nemotron-super-49b-v1",
+    name: "Llama 3.3 Nemotron 49B",
+    provider: "NVIDIA",
+    contextLength: 32768,
+    supportsVision: false,
+    supportsStreaming: true,
+  },
+  {
+    id: "mistralai/mistral-small-24b-instruct",
+    name: "Mistral Small 24B",
+    provider: "NVIDIA",
+    contextLength: 32768,
+    supportsVision: false,
+    supportsStreaming: true,
+  },
+  {
+    id: "qwen/qwq-32b",
+    name: "Qwen QWQ 32B",
+    provider: "NVIDIA",
+    contextLength: 32768,
+    supportsVision: false,
+    supportsStreaming: true,
+  },
+  {
+    id: "meta/llama-3.3-70b-instruct",
+    name: "Llama 3.3 70B Instruct",
+    provider: "NVIDIA",
+    contextLength: 32768,
+    supportsVision: false,
+    supportsStreaming: true,
+    supportsToolCalling: true,
+  },
+  {
+    id: "meta/codellama-70b",
+    name: "CodeLlama 70B",
+    provider: "NVIDIA",
+    contextLength: 32768,
+    supportsVision: false,
+    supportsStreaming: true,
+  },
+  // OpenRouter Models
+  {
+    id: "openai/gpt-4o",
+    name: "GPT-4o (OpenRouter)",
+    provider: "OpenRouter",
+    contextLength: 128000,
+    supportsVision: true,
+    supportsStreaming: true,
+    supportsToolCalling: true,
+  },
+  {
+    id: "anthropic/claude-3-7-sonnet",
+    name: "Claude 3.7 Sonnet (OpenRouter)",
+    provider: "OpenRouter",
+    contextLength: 200000,
+    supportsVision: true,
+    supportsStreaming: true,
+    supportsToolCalling: true,
+  },
 ]
 
 const AIContext = createContext<AIContextType>({
@@ -134,7 +198,7 @@ export function AIProvider({ children }: { children: React.ReactNode }) {
     setIsGenerating(true)
     try {
       const model = availableModels.find((m) => m.id === selectedModel)
-
+      
       if (!model) {
         throw new Error(`Model ${selectedModel} not found`)
       }
@@ -168,6 +232,28 @@ export function AIProvider({ children }: { children: React.ReactNode }) {
           messages,
           maxTokens: options.maxTokens || 500,
           temperature: options.temperature || 0.7,
+        })
+      } else if (model.provider === "NVIDIA") {
+        // Use our NVIDIA AI implementation
+        result = await generateNvidiaCompletion({
+          model: selectedModel,
+          messages,
+          temperature: options.temperature || 0.6,
+          topP: options.topP || 0.7,
+          maxTokens: options.maxTokens || 1024,
+          frequencyPenalty: options.frequencyPenalty || 0,
+          presencePenalty: options.presencePenalty || 0,
+        })
+      } else if (model.provider === "OpenRouter") {
+        // Use our OpenRouter implementation
+        result = await generateOpenRouterCompletion({
+          model: selectedModel,
+          messages,
+          temperature: options.temperature || 0.7,
+          topP: options.topP || 0.9,
+          maxTokens: options.maxTokens || 2048,
+          tools: options.tools,
+          toolChoice: options.toolChoice,
         })
       } else {
         throw new Error(`Provider ${model.provider} not supported`)
