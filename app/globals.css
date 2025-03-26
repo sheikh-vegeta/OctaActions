@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+    --font-bangla: 'SolaimanLipi', sans-serif;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+
+  /* Ayu theme */
+  .ayu {
+    --background: 220 14% 10%;
+    --foreground: 50 10% 90%;
+    --card: 220 13% 12%;
+    --card-foreground: 50 10% 90%;
+    --popover: 220 13% 12%;
+    --popover-foreground: 50 10% 90%;
+    --primary: 25 90% 50%;
+    --primary-foreground: 220 14% 10%;
+    --secondary: 205 70% 35%;
+    --secondary-foreground: 50 10% 90%;
+    --muted: 220 14% 15%;
+    --muted-foreground: 220 10% 60%;
+    --accent: 65 80% 55%;
+    --accent-foreground: 220 14% 10%;
+    --destructive: 0 90% 50%;
+    --destructive-foreground: 50 10% 90%;
+    --border: 220 13% 20%;
+    --input: 220 13% 15%;
+    --ring: 25 90% 50%;
+  }
+
+  /* Andromeda theme */
+  .andromeda {
+    --background: 225 14% 16%;
+    --foreground: 289 5% 84%;
+    --card: 225 14% 18%;
+    --card-foreground: 289 5% 84%;
+    --popover: 225 14% 18%;
+    --popover-foreground: 289 5% 84%;
+    --primary: 337 100% 48%;
+    --primary-foreground: 289 5% 84%;
+    --secondary: 220 14% 23%;
+    --secondary-foreground: 289 5% 84%;
+    --muted: 225 14% 20%;
+    --muted-foreground: 249 7% 45%;
+    --accent: 85 80% 60%;
+    --accent-foreground: 225 14% 16%;
+    --destructive: 337 100% 48%;
+    --destructive-foreground: 289 5% 84%;
+    --border: 225 14% 24%;
+    --input: 225 14% 20%;
+    --ring: 337 100% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.animate-in {
+  animation: animate-in 0.5s ease-out;
+}
+
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Code syntax highlighting */
+pre {
+  @apply rounded-lg p-4 overflow-x-auto;
+}
+
+code {
+  @apply font-mono text-sm;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-muted-foreground;
+}
+
+.token.punctuation {
+  @apply text-muted-foreground;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  @apply text-blue-500;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  @apply text-green-500;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-yellow-500;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-purple-500;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-pink-500;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  @apply text-orange-500;
+}
+
+.monaco-editor .suggest-widget {
+  @apply z-50;
+}
+
+.font-bangla {
+  font-family: var(--font-bangla), 'Li Ador Noirrit', sans-serif;
+}
