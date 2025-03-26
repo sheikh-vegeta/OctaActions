@@ -37,12 +37,27 @@ const nextConfig = {
       topLevelAwait: true
     };
 
-    // Handle ES modules
+    // Handle ES modules and private class fields
     config.module.rules.push({
-      test: /\.m?js$/,
-      resolve: {
-        fullySpecified: false,
-      },
+      test: /\.(js|mjs|cjs|ts)$/,
+      include: [
+        /node_modules[\/]undici/,
+        /node_modules[\/]smee-client/,
+        /node_modules[\/]probot/
+      ],
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ['@babel/preset-env', { targets: { node: 'current' } }]
+          ],
+          plugins: [
+            ['@babel/plugin-transform-class-properties', { loose: true }],
+            ['@babel/plugin-transform-private-methods', { loose: true }],
+            ['@babel/plugin-transform-private-property-in-object', { loose: true }]
+          ]
+        }
+      }
     });
 
     // Handle node modules in the browser

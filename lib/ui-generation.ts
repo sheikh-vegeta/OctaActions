@@ -96,6 +96,7 @@ export async function generateUIComponent(options: UIGenerationOptions): Promise
       }
       
       const replicate = getReplicateClient();
+      // Use type assertion to match the actual Replicate API structure
       const response = await replicate.chat.completions.create({
         model: modelId || 'replicate/llama-7b',
         messages: [
@@ -103,9 +104,10 @@ export async function generateUIComponent(options: UIGenerationOptions): Promise
           { role: 'user', content: prompt },
         ],
         temperature,
-      });
+      } as any);
       
-      result = response.choices[0].message.content || '';
+      // Use optional chaining and provide a fallback
+      result = response?.choices?.[0]?.message?.content || '';
     }
     
     return result;

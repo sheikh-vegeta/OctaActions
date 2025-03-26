@@ -238,6 +238,7 @@ export function UIGenerator() {
                     className="hidden" 
                     accept="image/*" 
                     onChange={handleImageUpload} 
+                    aria-label="Upload image"
                   />
                 </div>
               ) : (

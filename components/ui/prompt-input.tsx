@@ -83,7 +83,10 @@ const PromptInput = React.forwardRef<HTMLDivElement, PromptInputProps>(
           {...props}
         >
           <div
-            className="scrollbar-thumb-rounded-md flex max-h-[--prompt-input-max-height] w-full flex-1 flex-col overflow-hidden overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent"
+            className={cn(
+              "scrollbar-thumb-rounded-md flex max-h-[var(--prompt-input-max-height)] w-full flex-1 flex-col overflow-hidden overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent",
+              className
+            )}
             style={{ "--prompt-input-max-height": `${maxHeight}px` } as React.CSSProperties}
           >
             {children}
