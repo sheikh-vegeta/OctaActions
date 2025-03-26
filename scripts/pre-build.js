@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const packageJsonPath = path.join(process.cwd(), 'package.json');
+const nextConfigPath = path.join(process.cwd(), 'next.config.js');
 
 try {
   console.log('Running pre-build compatibility checks...');
@@ -43,6 +44,48 @@ try {
     }
   } else {
     console.log('All dependencies are compatible. No changes needed.');
+  }
+
+  // Check next.config.js for conflicts
+  if (fs.existsSync(nextConfigPath)) {
+    try {
+      // Read the config file content
+      const nextConfigContent = fs.readFileSync(nextConfigPath, 'utf8');
+
+      // Check if we can detect both arrays to avoid conflicts
+      const hasServerComponentsExternal = nextConfigContent.includes('serverComponentsExternalPackages');
+      const hasTranspilePackages = nextConfigContent.includes('transpilePackages');
+
+      if (hasServerComponentsExternal && hasTranspilePackages) {
+        console.log('Checking Next.js config for conflicts...');
+        
+        // This is a simple string-based fix to avoid parsing JS code
+        // Look for packages that might be in both arrays
+        const potentialConflicts = ['@clerk/shared', '@clerk/nextjs', '@clerk/clerk-react'];
+        
+        let modifiedContent = nextConfigContent;
+        let hadConflicts = false;
+
+        potentialConflicts.forEach(pkg => {
+          // If package appears in serverComponentsExternalPackages, remove it from transpilePackages
+          const regex = new RegExp(`(transpilePackages[\\s\\S]*?)((['"]\s*${pkg}\s*['"]\s*,?)|([,]\s*['"]\s*${pkg}\s*['"]))`, 'g');
+          if (nextConfigContent.includes(`serverComponentsExternalPackages`) && 
+              nextConfigContent.includes(pkg) && 
+              regex.test(nextConfigContent)) {
+            modifiedContent = modifiedContent.replace(regex, '$1'); // Remove the package from transpilePackages
+            hadConflicts = true;
+            console.log(`Removed ${pkg} from transpilePackages to avoid conflict`);
+          }
+        });
+
+        if (hadConflicts) {
+          fs.writeFileSync(nextConfigPath, modifiedContent);
+          console.log('Updated next.config.js to resolve conflicts');
+        }
+      }
+    } catch (error) {
+      console.warn('Warning: Could not check/fix Next.js config:', error.message);
+    }
   }
   
   // Create or update .npmrc to ensure correct registry access

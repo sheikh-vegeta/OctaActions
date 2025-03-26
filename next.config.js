@@ -16,7 +16,6 @@ const nextConfig = {
   // These are client-side only components so they won't be used in Edge functions
   transpilePackages: [
     'scheduler',
-    '@clerk/shared',
   ],
   // Increase the timeout for builds if necessary
   staticPageGenerationTimeout: 300,
