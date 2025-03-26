@@ -48,6 +48,19 @@ const nextConfig = {
       },
     });
 
+    // Add this to handle undici
+    config.module.rules.push({
+      test: /\.m?js$/,
+      include: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: [['next/babel', { "useBuiltIns": "usage", "corejs": 3 }]],
+          plugins: ['@babel/plugin-syntax-dynamic-import'],
+        },
+      },
+    });
+
     return config;
   },
 };
