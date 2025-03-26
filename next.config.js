@@ -16,6 +16,8 @@ const nextConfig = {
   // These are client-side only components so they won't be used in Edge functions
   transpilePackages: [
     'scheduler',
+    'undici',
+    'smee-client',
   ],
   // Increase the timeout for builds if necessary
   staticPageGenerationTimeout: 300,
@@ -28,19 +30,14 @@ const nextConfig = {
       'img.clerk.com',
     ],
   },
-  webpack: (config, options) => {
+  webpack: (config, { isServer }) => {
     config.experiments = {
       asyncWebAssembly: true,
       layers: true,
       topLevelAwait: true
-    }
+    };
 
-    config.module.rules.push({
-      test: /\.handlebars$/,
-      use: ['handlebars-loader']
-    });
-
-    // Add this to handle ES modules
+    // Handle ES modules
     config.module.rules.push({
       test: /\.m?js$/,
       resolve: {
@@ -48,18 +45,16 @@ const nextConfig = {
       },
     });
 
-    // Add this to handle undici
-    config.module.rules.push({
-      test: /\.m?js$/,
-      include: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: [['next/babel', { "useBuiltIns": "usage", "corejs": 3 }]],
-          plugins: ['@babel/plugin-syntax-dynamic-import'],
-        },
-      },
-    });
+    // Handle node modules in the browser
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        crypto: false,
+      };
+    }
 
     return config;
   },
