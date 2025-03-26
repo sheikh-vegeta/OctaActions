@@ -21,6 +21,8 @@
     "@babel/parser": "^7.23.6",
     "@babel/traverse": "^7.23.6",
     "@babel/types": "^7.23.6",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.23.3",
     "@clerk/nextjs": "^4.27.2",
     "@emotion/is-prop-valid": "^1.2.2",
     "@hookform/resolvers": "^3.9.1",
