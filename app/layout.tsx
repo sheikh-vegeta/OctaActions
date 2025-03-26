@@ -2,8 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Anek_Bangla as FontBangla, Inter } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { AnalyticsProvider } from "@/components/analytics-provider"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -42,25 +41,25 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <link href="https://fonts.cdnfonts.com/css/li-ador-noirrit?styles=87152" rel="stylesheet" />
-        </head>
-        <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable, fontBangla.variable)}>
-          <AuthProvider>
-            <AIProvider>
-              <GitHubProvider>
-                <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-                  {children}
-                  <Toaster />
-                  <Analytics />
-                  <SpeedInsights />
-                </ThemeProvider>
-              </GitHubProvider>
-            </AIProvider>
-          </AuthProvider>
-        </body>
-      </html>
+      <AnalyticsProvider>
+        <html lang="en" suppressHydrationWarning>
+          <head>
+            <link href="https://fonts.cdnfonts.com/css/li-ador-noirrit?styles=87152" rel="stylesheet" />
+          </head>
+          <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable, fontBangla.variable)}>
+            <AuthProvider>
+              <AIProvider>
+                <GitHubProvider>
+                  <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+                    {children}
+                    <Toaster />
+                  </ThemeProvider>
+                </GitHubProvider>
+              </AIProvider>
+            </AuthProvider>
+          </body>
+        </html>
+      </AnalyticsProvider>
     </ClerkProvider>
   )
 }

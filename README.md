@@ -139,20 +139,30 @@ GITHUB_TOKEN=ghp_xxx
 
 ## Deployment
 
-OctaActions is optimized for deployment on Vercel. The project includes:
+OctaActions is optimized for deployment on Vercel.
 
-- Vercel Analytics integration for user insights
-- Speed Insights for performance monitoring
-- Build optimization scripts for dependency compatibility
+### Deployment Features
+
+- Built-in analytics integration through the AnalyticsProvider component
+- Pre-build optimization scripts to ensure dependency compatibility
 - Security headers for production deployments
 
-To deploy to Vercel:
+### Deployment Steps
 
 1. Fork the repository and connect it to your Vercel account
 2. Set the required environment variables in the Vercel dashboard
-3. Deploy using the default settings
+3. Enable Vercel Analytics and Speed Insights in the Vercel project settings
+4. Deploy using the default settings
 
 The application will automatically use the pre-build script to ensure dependency compatibility.
+
+### Environment Variables for Deployment
+
+```
+NEXT_PUBLIC_ANALYTICS_ENABLED=true
+```
+
+For the complete list of environment variables, see the `env.template` file.
 
 ## Getting Started
 
