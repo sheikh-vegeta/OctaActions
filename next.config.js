@@ -16,7 +16,6 @@ const nextConfig = {
   // These are client-side only components so they won't be used in Edge functions
   transpilePackages: [
     'scheduler',
-    
   ],
   // Increase the timeout for builds if necessary
   staticPageGenerationTimeout: 300,
@@ -39,6 +38,14 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.handlebars$/,
       use: ['handlebars-loader']
+    });
+
+    // Add this to handle ES modules
+    config.module.rules.push({
+      test: /\.m?js$/,
+      resolve: {
+        fullySpecified: false,
+      },
     });
 
     return config;
