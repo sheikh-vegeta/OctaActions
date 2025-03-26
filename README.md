@@ -164,6 +164,20 @@ NEXT_PUBLIC_ANALYTICS_ENABLED=true
 
 For the complete list of environment variables, see the `env.template` file.
 
+### Troubleshooting Deployment
+
+If you encounter deployment issues, check the following:
+
+1. **Missing Environment Variables**: Make sure all required variables are set in your Vercel project settings. The pre-build script will provide placeholders for the build process, but the app won't function correctly without real values.
+
+2. **Edge Runtime Warnings**: Warnings about Edge Runtime APIs in dependencies can be safely ignored as they only affect Edge functions, not the main application.
+
+3. **Dependency Compatibility**: The pre-build script automatically fixes incompatible dependency versions. If you still face issues, update the problematic dependencies manually in your package.json.
+
+4. **Vercel Analytics**: Analytics must be enabled in the Vercel dashboard, not just through code. Go to Project Settings > Analytics to enable this feature.
+
+For additional help, check the [Vercel deployment documentation](https://vercel.com/docs/deployments/overview).
+
 ## Getting Started
 
 ```bash

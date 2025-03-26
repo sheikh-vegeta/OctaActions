@@ -55,6 +55,34 @@ try {
   } catch (npmrcError) {
     console.warn('Warning: Could not update .npmrc file:', npmrcError.message);
   }
+
+  // Ensure required environment variables have fallbacks for build process
+  const requiredEnvVars = [
+    // Auth
+    'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY',
+    'CLERK_SECRET_KEY',
+    'AUTH0_SECRET',
+    // GitHub
+    'GITHUB_TOKEN',
+    // AI Services
+    'OPENAI_API_KEY',
+    'HUGGING_FACE_TOKEN',
+  ];
+
+  // Only for build process, not for actual usage
+  let missingVars = [];
+  requiredEnvVars.forEach(varName => {
+    if (!process.env[varName]) {
+      missingVars.push(varName);
+      // Only for build process - these are fake placeholder values
+      process.env[varName] = `placeholder-for-build-${varName}`;
+    }
+  });
+
+  if (missingVars.length > 0) {
+    console.warn(`\nWarning: The following required env vars have placeholders for build:\n${missingVars.join('\n')}`);
+    console.warn('These placeholders will allow the build to complete, but the app will not function correctly without real values.\n');
+  }
   
   console.log('Pre-build checks completed successfully');
   process.exit(0);

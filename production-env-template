@@ -1,0 +1,27 @@
+# Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+# Auth0 configuration
+NEXT_PUBLIC_AUTH0_DOMAIN=
+NEXT_PUBLIC_AUTH0_CLIENT_ID=
+NEXT_PUBLIC_AUTH0_REDIRECT_URI=https://octaactions.vercel.app/api/auth/callback/auth0
+AUTH0_SECRET=
+
+# Site configuration
+NEXT_PUBLIC_SITE_URL=https://octaactions.vercel.app
+NEXT_PUBLIC_SITE_NAME=OctaActions
+
+# API Keys for AI services
+OPENAI_API_KEY=
+HUGGING_FACE_TOKEN=
+GROQ_API_KEY=
+ELEVENLABS_API_KEY=
+NVIDIA_API_KEY=
+OPENROUTER_API_KEY=
+
+# GitHub integration
+GITHUB_TOKEN=
+
+# Analytics
+NEXT_PUBLIC_ANALYTICS_ENABLED=true
