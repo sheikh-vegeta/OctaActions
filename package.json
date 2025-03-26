@@ -1,7 +1,7 @@
 {
   "name": "octaactions",
   "version": "0.1.0",
-  "private": true,
+  "private": true,  
   "type": "module",
   "scripts": {
     "dev": "next dev",
@@ -11,6 +11,33 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "mcp:filesystem": "npx -y @modelcontextprotocol/server-filesystem"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js",
+      "mjs",
+      "cjs",
+      "jsx",
+      "ts",
+      "tsx",
+      "json",
+      "node"
+    ],
+    "extensionsToTreatAsEsm": [
+      ".ts",
+      ".tsx"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(@swc/helpers)/)"
+    ],
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "transform": {
+      "^.+.(t|j)sx?$": "@swc/jest"
+    }
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.1.0",
