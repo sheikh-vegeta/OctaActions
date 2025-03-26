@@ -1,7 +1,7 @@
 {
   "name": "octaactions",
   "version": "0.1.0",
-  "private": true,  
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "next dev",
@@ -130,6 +130,8 @@
     "@babel/plugin-transform-class-properties": "^7.25.9",
     "@babel/plugin-transform-private-methods": "^7.25.9",
     "@babel/plugin-transform-private-property-in-object": "^7.25.9",
+    "@swc/core": "^1.11.13",
+    "@swc/jest": "^0.2.37",
     "@testing-library/react": "^14.2.2",
     "@types/node": "^20.14.0",
     "@types/pino-std-serializers": "^2.4.1",

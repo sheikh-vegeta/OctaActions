@@ -1,7 +1,7 @@
 "use client"
 
 import { InferenceClient } from "@huggingface/inference"
-import type React from "react"
+import React from "react"
 
 import { createContext, useContext, useState } from "react"
 import { generateText } from "ai"

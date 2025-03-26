@@ -5,7 +5,7 @@ import { useUser } from "@clerk/nextjs"
 import { CustomAuth0Provider } from "@/components/auth/auth0-provider"
 import { UnifiedAuthProvider, useUnifiedAuth } from "@/components/auth/unified-auth-provider"
 
-interface AuthContextType {
+export interface AuthContextType {
   isAuthenticated: boolean
   user: any
   isLoading: boolean

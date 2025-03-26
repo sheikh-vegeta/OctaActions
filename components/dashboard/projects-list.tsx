@@ -14,7 +14,7 @@ import {
 import { Presentation, Smartphone, FileCode, MoreVertical, Pencil, Trash, Copy } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 
-type ProjectType = "presentation" | "prototype" | "code"
+type ProjectType = "presentation" | "prototype" | "code";
 
 interface Project {
   id: string
