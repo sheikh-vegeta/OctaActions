@@ -8,7 +8,6 @@ const nextConfig = {
     // These settings help prevent issues with Clerk integration
     serverComponentsExternalPackages: [
       '@clerk/nextjs',
-      '@clerk/shared',
       '@clerk/clerk-react',
     ],
   },
@@ -16,6 +15,7 @@ const nextConfig = {
   // These are client-side only components so they won't be used in Edge functions
   transpilePackages: [
     'scheduler',
+    
   ],
   // Increase the timeout for builds if necessary
   staticPageGenerationTimeout: 300,
@@ -27,6 +27,13 @@ const nextConfig = {
       'github.com',
       'img.clerk.com',
     ],
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\\.handlebars$/,
+      use: 'handlebars-loader',
+    });
+    return config;
   },
 };
 
